@@ -1,4 +1,5 @@
 import { StyledProductCard } from './style';
+
 import { StyledButton } from '../../../styles/button';
 import { StyledParagraph, StyledTitle } from '../../../styles/typography';
 

@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { TextField, TextFieldProps } from '@mui/material';
 import styled from 'styled-components';
 
 export const StyledForm = styled.form`
@@ -7,7 +7,11 @@ export const StyledForm = styled.form`
   gap: 20px;
 `;
 
-export const StyledTextField = styled(TextField)`
+type StyledTextFieldProps = TextFieldProps & {
+  variant?: 'standard' | 'outlined' | 'filled';
+};
+
+export const StyledTextField = styled(TextField)<StyledTextFieldProps>`
   width: 100%;
 
   input {
