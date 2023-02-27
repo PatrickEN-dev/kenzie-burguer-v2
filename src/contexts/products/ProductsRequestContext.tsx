@@ -30,7 +30,13 @@ export const ProductsRequestProvider = ({
     AxiosResponse<iProductsList[]>
   > => {
     try {
-      const response = await API.get('/products');
+      const token = localStorage.getItem('@USERTOKEN');
+
+      const response = await API.get('/products', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const products = response.data as iProductsList[];
       setProductsList(products);

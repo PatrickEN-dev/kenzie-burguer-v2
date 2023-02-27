@@ -9,7 +9,7 @@ type IInputProps = {
 } & TextFieldProps;
 
 export const Input = forwardRef<HTMLInputElement, IInputProps>(
-  ({ label, type, error, ...rest }, ref) => (
+  ({ label, type, error = undefined, ...rest }, ref) => (
     <fieldset>
       <StyledTextField label={label} type={type} ref={ref} {...rest} />
       {error && <StyledParagraph fontColor='red'>{error}</StyledParagraph>}

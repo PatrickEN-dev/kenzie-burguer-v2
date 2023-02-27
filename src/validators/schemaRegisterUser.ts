@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as yup from 'yup';
 
-export const schemaRegister = yup
+export const schemaRegisterUser = yup
   .object({
     name: yup.string().required('preencha com seu nome '),
     email: yup.string().email().required('preencha com um email válido '),

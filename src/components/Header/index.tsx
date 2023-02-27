@@ -6,10 +6,15 @@ import { StyledHeader } from './style';
 import LogoKenzieBurguer from '../../assets/LogoKenzieBurguer.svg';
 
 import { StyledContainer } from '../../styles/grid';
-import { UserShopContext } from '../../contexts/user/ShopPageModal/UserShopPageContext';
+import { ModalShopPageContext } from '../../contexts/user/shopPageModalContext/ModalShopPageContext';
 
 const Header = () => {
-  const { setIsOpenModal } = useContext(UserShopContext);
+  const { setIsOpenModal } = useContext(ModalShopPageContext);
+
+  const logoutUSer = () => {
+    localStorage.removeItem('@USERTOKEN');
+    localStorage.removeItem('@USERID');
+  };
 
   return (
     <StyledHeader>
@@ -31,7 +36,7 @@ const Header = () => {
               >
                 <MdShoppingCart size={28} />
               </button>
-              <button type='button'>
+              <button type='button' onClick={logoutUSer}>
                 <MdLogout size={28} />
               </button>
             </div>

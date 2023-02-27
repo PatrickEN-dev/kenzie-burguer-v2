@@ -6,16 +6,19 @@ import { ThemeProvider } from 'styled-components';
 import { mainTheme } from './styles/theme';
 import App from './App';
 import { UserRequestProvider } from './contexts/user/UserRequestContext/UserRequestContext';
-import { UserShopProvider } from './contexts/user/ShopPageModal/UserShopPageContext';
+import { ModalShopPageContext } from './contexts/user/shopPageModalContext/ModalShopPageContext';
+import { ProductsRequestProvider } from './contexts/products/ProductsRequestContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={mainTheme}>
         <UserRequestProvider>
-          <UserShopProvider>
-            <App />
-          </UserShopProvider>
+          <ModalShopPageContext>
+            <ProductsRequestProvider>
+              <App />
+            </ProductsRequestProvider>
+          </ModalShopPageContext>
         </UserRequestProvider>
       </ThemeProvider>
     </BrowserRouter>

@@ -7,7 +7,7 @@ import { iUserLogin } from '../../../contexts/user/UserRequestContext/interfaces
 import { UserRequestContext } from '../../../contexts/user/UserRequestContext/UserRequestContext';
 import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
-import { schemaLogin } from '../../../validators/schemaLogin';
+import { schemaLoginUser } from '../../../validators/schemaLoginUser';
 import { Input } from '../Input';
 
 const LoginForm = () => {
@@ -16,7 +16,7 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<iUserLogin>({
-    resolver: yupResolver(schemaLogin),
+    resolver: yupResolver(schemaLoginUser),
     mode: 'onChange',
   });
 
@@ -28,19 +28,11 @@ const LoginForm = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(submit)}>
-      <Input
-        label='Email'
-        type='email'
-        {...register('email')}
-        error={errors.email?.message}
-      />
-      <Input
-        label='Senha'
-        type='password'
-        {...register('password')}
-        error={errors.password?.message}
-      />
-      <StyledButton $buttonSize='default' $buttonStyle='green'>
+      <Input label='Email' type='email' {...register('email')} />
+      {errors.email?.message}
+      <Input label='Senha' type='password' {...register('password')} />
+      {errors.password?.message}
+      <StyledButton $buttonSize='default' $buttonStyle='green' type='submit'>
         Entrar
       </StyledButton>
     </StyledForm>

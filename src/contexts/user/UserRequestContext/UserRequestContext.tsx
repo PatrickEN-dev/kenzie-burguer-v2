@@ -49,15 +49,16 @@ export const UserRequestProvider = ({
     try {
       const response = await API.post('/login', data);
 
-      toast.success('Login realizado com sucesso!');
-
       const userID = response.data.user.id;
       const userToken = response.data.accessToken;
 
       localStorage.setItem('@USERTOKEN', userToken);
       localStorage.setItem('@USERID', userID);
+
+      toast.success('Login realizado com sucesso!');
+      setUser(response.data.user);
+
       navigate(`/shop/${userID}`);
-      
     } catch (error) {
       console.error(error);
       toast.error('Não foi possivel realizar o login');

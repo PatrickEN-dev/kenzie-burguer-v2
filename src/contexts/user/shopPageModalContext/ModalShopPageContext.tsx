@@ -9,14 +9,14 @@ interface iUSerShopContext {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const UserShopContext = createContext({} as iUSerShopContext);
+export const ModalShopPageContext = createContext({} as iUSerShopContext);
 
 export const UserShopProvider = ({ children }: iUserShopProviderProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
-    <UserShopContext.Provider value={{ isOpenModal, setIsOpenModal }}>
+    <ModalShopPageContext.Provider value={{ isOpenModal, setIsOpenModal }}>
       {children}
-    </UserShopContext.Provider>
+    </ModalShopPageContext.Provider>
   );
 };

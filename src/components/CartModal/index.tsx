@@ -4,10 +4,10 @@ import CartProductList from './CartProductList';
 
 import { StyledCartModalBox } from './style';
 import { StyledParagraph, StyledTitle } from '../../styles/typography';
-import { UserShopContext } from '../../contexts/user/ShopPageModal/UserShopPageContext';
+import { ModalShopPageContext } from '../../contexts/user/shopPageModalContext/ModalShopPageContext';
 
 const CartModal = () => {
-  const { isOpenModal, setIsOpenModal } = useContext(UserShopContext);
+  const { isOpenModal, setIsOpenModal } = useContext(ModalShopPageContext);
 
   return (
     <StyledCartModalBox>
