@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import ProductList from '../../components/ProductList';
 
 import { StyledContainer } from '../../styles/grid';
-import { ModalShopPageContext } from '../../contexts/user/shopPageModalContext/ModalShopPageContext';
+import { ModalShopPageContext } from '../../contexts/user/ModalShopPageContext/ModalShopPageContext';
 
 const ShopPage = () => {
   const { isOpenModal } = useContext(ModalShopPageContext);

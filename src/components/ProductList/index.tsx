@@ -29,7 +29,16 @@ const ProductList = () => {
 
   return (
     <StyledProductList>
-      <ProductCard />
+      {productsList.map((product) => (
+        <ProductCard
+          key={product.id}
+          category={product.category}
+          img={product.img}
+          name={product.name}
+          price={product.price}
+          id={product.id}
+        />
+      ))}
     </StyledProductList>
   );
 };

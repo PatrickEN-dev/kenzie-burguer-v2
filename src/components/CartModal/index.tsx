@@ -4,7 +4,7 @@ import CartProductList from './CartProductList';
 
 import { StyledCartModalBox } from './style';
 import { StyledParagraph, StyledTitle } from '../../styles/typography';
-import { ModalShopPageContext } from '../../contexts/user/shopPageModalContext/ModalShopPageContext';
+import { ModalShopPageContext } from '../../contexts/user/ModalShopPageContext/ModalShopPageContext';
 
 const CartModal = () => {
   const { isOpenModal, setIsOpenModal } = useContext(ModalShopPageContext);

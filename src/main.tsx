@@ -5,21 +5,17 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { mainTheme } from './styles/theme';
 import App from './App';
-import { UserRequestProvider } from './contexts/user/UserRequestContext/UserRequestContext';
-import { ModalShopPageContext } from './contexts/user/shopPageModalContext/ModalShopPageContext';
-import { ProductsRequestProvider } from './contexts/products/ProductsRequestContext';
+import { Providers } from './contexts/providers/providers';
+
+// Preciso chamar o componente modal aqui
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={mainTheme}>
-        <UserRequestProvider>
-          <ModalShopPageContext>
-            <ProductsRequestProvider>
-              <App />
-            </ProductsRequestProvider>
-          </ModalShopPageContext>
-        </UserRequestProvider>
+        <Providers>
+          <App />
+        </Providers>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

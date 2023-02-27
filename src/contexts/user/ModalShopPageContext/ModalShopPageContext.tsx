@@ -11,7 +11,8 @@ interface iUSerShopContext {
 
 export const ModalShopPageContext = createContext({} as iUSerShopContext);
 
-export const UserShopProvider = ({ children }: iUserShopProviderProps) => {
+export const ModalShopPageProvider = ({ children }: iUserShopProviderProps) => {
+  // Preciso chamar esse context no main
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (

@@ -6,7 +6,7 @@ import { StyledHeader } from './style';
 import LogoKenzieBurguer from '../../assets/LogoKenzieBurguer.svg';
 
 import { StyledContainer } from '../../styles/grid';
-import { ModalShopPageContext } from '../../contexts/user/shopPageModalContext/ModalShopPageContext';
+import { ModalShopPageContext } from '../../contexts/user/ModalShopPageContext/ModalShopPageContext';
 
 const Header = () => {
   const { setIsOpenModal } = useContext(ModalShopPageContext);
