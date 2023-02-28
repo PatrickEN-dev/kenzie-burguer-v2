@@ -7,7 +7,8 @@ import { StyledParagraph, StyledTitle } from '../../styles/typography';
 import { ModalShopPageContext } from '../../contexts/user/ModalShopPageContext/ModalShopPageContext';
 
 const CartModal = () => {
-  const { isOpenModal, setIsOpenModal } = useContext(ModalShopPageContext);
+  const { isOpenModal, setIsOpenModal, cartModalItens } =
+    useContext(ModalShopPageContext);
 
   return (
     <StyledCartModalBox>
@@ -27,14 +28,18 @@ const CartModal = () => {
           </button>
         </header>
         <div className='cartBox'>
-          <CartProductList />
-
-          <div className='emptyBox'>
-            <StyledTitle tag='h3' $fontSize='three' textAlign='center'>
-              Sua sacola está vazia
-            </StyledTitle>
-            <StyledParagraph textAlign='center'>Adicione itens</StyledParagraph>
-          </div>
+          {cartModalItens.length > 0 ? (
+            <CartProductList />
+          ) : (
+            <div className='emptyBox'>
+              <StyledTitle tag='h3' $fontSize='three' textAlign='center'>
+                Sua sacola está vazia
+              </StyledTitle>
+              <StyledParagraph textAlign='center'>
+                Adicione itens
+              </StyledParagraph>
+            </div>
+          )}
         </div>
       </dialog>
     </StyledCartModalBox>

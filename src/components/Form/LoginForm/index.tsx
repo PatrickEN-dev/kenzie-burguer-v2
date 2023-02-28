@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { iUserLogin } from '../../../contexts/user/UserRequestContext/interfaces/UserInterfaces';
+import { iUserLoginForm } from '../../../contexts/user/UserRequestContext/interfaces/UserInterfaces';
 import { UserRequestContext } from '../../../contexts/user/UserRequestContext/UserRequestContext';
 import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
@@ -15,23 +15,33 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iUserLogin>({
+  } = useForm<iUserLoginForm>({
     resolver: yupResolver(schemaLoginUser),
     mode: 'onChange',
   });
 
   const { loginUserRequest } = useContext(UserRequestContext);
 
-  const submit = (formData: iUserLogin) => {
+  const submit = (formData: iUserLoginForm) => {
     loginUserRequest(formData);
   };
 
   return (
     <StyledForm onSubmit={handleSubmit(submit)}>
-      <Input label='Email' type='email' {...register('email')} />
+      <Input
+        label='Email'
+        type='email'
+        {...register('email')}
+        error={errors.email?.message}
+      />
       {errors.email?.message}
-      <Input label='Senha' type='password' {...register('password')} />
-      {errors.password?.message}
+      <Input
+        label='Senha'
+        type='password'
+        {...register('password')}
+        error={errors.password?.message}
+      />
+
       <StyledButton $buttonSize='default' $buttonStyle='green' type='submit'>
         Entrar
       </StyledButton>

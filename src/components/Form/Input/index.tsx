@@ -1,18 +1,25 @@
-import { forwardRef } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 import { TextFieldProps } from '@mui/material';
 import { StyledTextField } from '../../../styles/form';
 import { StyledParagraph } from '../../../styles/typography';
 
-type IInputProps = {
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  error?: string | undefined;
-} & TextFieldProps;
+  error: string | undefined;
+}
 
 export const Input = forwardRef<HTMLInputElement, IInputProps>(
-  ({ label, type, error = undefined, ...rest }, ref) => (
+  ({ label, type, error, ...rest }, ref) => (
     <fieldset>
-      <StyledTextField label={label} type={type} ref={ref} {...rest} />
-      {error && <StyledParagraph fontColor='red'>{error}</StyledParagraph>}
+      <StyledTextField
+        label={label}
+        type={type}
+        ref={ref}
+        {...(rest as TextFieldProps)}
+      />
+      {error ? (
+        <StyledParagraph fontColor='red'>{error}</StyledParagraph>
+      ) : null}
     </fieldset>
   )
 );

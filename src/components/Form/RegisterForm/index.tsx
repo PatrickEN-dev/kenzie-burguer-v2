@@ -27,18 +27,34 @@ const RegisterForm = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Input label='Nome' type='text' {...register('name')} />
-      {errors.name?.message}
-      <Input label='Email' type='email' {...register('email')} />
-      {errors.email?.message}
-      <Input label='Senha' type='text' {...register('password')} />
-      {errors.password?.message}
       <Input
+        error={errors.name?.message}
+        label='Nome'
+        type='text'
+        {...register('name')}
+      />
+
+      <Input
+        error={errors.email?.message}
+        label='Email'
+        type='email'
+        {...register('email')}
+      />
+
+      <Input
+        error={errors.password?.message}
+        label='Senha'
+        type='text'
+        {...register('password')}
+      />
+
+      <Input
+        error={errors.confirm_password?.message}
         label='Confirme a senha'
         type='password'
         {...register('confirm_password')}
       />
-      {errors.confirm_password?.message}
+
       <StyledButton $buttonSize='default' $buttonStyle='gray' type='submit'>
         Cadastrar
       </StyledButton>

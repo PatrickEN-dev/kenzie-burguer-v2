@@ -2,19 +2,17 @@
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
 
-import React, { createContext, useState } from 'react';
+import { toast } from 'react-toastify';
+import React, { createContext, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
-import { iProductsList } from './interfaces/productsInterfaces';
+import {
+  iProductsList,
+  iProductsrequestContextItens,
+} from './interfaces/productsInterfaces';
 import { API } from '../../Services/API';
 
 interface ProductsrequestProviderProps {
   children: React.ReactNode;
-}
-
-interface iProductsrequestContextItens {
-  showProductsRequest: () => Promise<AxiosResponse<iProductsList[]>>;
-  productsList: iProductsList[];
-  setProductsList: React.Dispatch<React.SetStateAction<iProductsList[]>>;
 }
 
 export const ProductsRequestContext = createContext(
@@ -25,6 +23,8 @@ export const ProductsRequestProvider = ({
   children,
 }: ProductsrequestProviderProps) => {
   const [productsList, setProductsList] = useState([] as iProductsList[]);
+  const [searchProducts, setSearchProducts] = useState('');
+  const [filterProducts, setFilterProducts] = useState<iProductsList[]>([]);
 
   const showProductsRequest = async (): Promise<
     AxiosResponse<iProductsList[]>
@@ -37,7 +37,6 @@ export const ProductsRequestProvider = ({
           Authorization: `Bearer ${token}`,
         },
       });
-
       const products = response.data as iProductsList[];
       setProductsList(products);
 
@@ -48,9 +47,49 @@ export const ProductsRequestProvider = ({
     }
   };
 
+  useEffect(() => {
+    showProductsRequest();
+  }, []);
+
+  const filterProductSearchBar = () => {
+    const recieveProducts = [...productsList];
+    const filterNameProducts = recieveProducts.filter((element) =>
+      element.name.toLowerCase().includes(searchProducts.toLowerCase())
+    );
+    if (filterNameProducts.length) {
+      setFilterProducts(filterNameProducts);
+    }
+
+    const filterCategoryProducts = recieveProducts.filter((element) =>
+      element.category.toLowerCase().includes(searchProducts.toLowerCase())
+    );
+    if (filterCategoryProducts.length) {
+      setFilterProducts(filterCategoryProducts);
+    }
+
+    if (
+      filterNameProducts.length === 0 &&
+      filterCategoryProducts.length === 0
+    ) {
+      toast.error(
+        'Não consegui encontar, mas aqui estão todos os nossos produtos'
+      );
+      setFilterProducts([]);
+    }
+  };
+
   return (
     <ProductsRequestContext.Provider
-      value={{ showProductsRequest, productsList, setProductsList }}
+      value={{
+        showProductsRequest,
+        productsList,
+        setProductsList,
+        searchProducts,
+        setSearchProducts,
+        filterProducts,
+        setFilterProducts,
+        filterProductSearchBar,
+      }}
     >
       {children}
     </ProductsRequestContext.Provider>

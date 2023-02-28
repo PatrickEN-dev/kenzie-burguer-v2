@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { MdShoppingCart, MdLogout } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 import SearchForm from './SearchForm';
 import { StyledHeader } from './style';
@@ -10,10 +11,13 @@ import { ModalShopPageContext } from '../../contexts/user/ModalShopPageContext/M
 
 const Header = () => {
   const { setIsOpenModal } = useContext(ModalShopPageContext);
+  const navigate = useNavigate();
 
   const logoutUSer = () => {
     localStorage.removeItem('@USERTOKEN');
     localStorage.removeItem('@USERID');
+
+    navigate('/');
   };
 
   return (

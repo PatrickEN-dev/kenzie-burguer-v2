@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import { StyledProductCard } from './style';
 
 import { StyledButton } from '../../../styles/button';
 import { StyledParagraph, StyledTitle } from '../../../styles/typography';
 import { iProductsList } from '../../../contexts/products/interfaces/productsInterfaces';
+import { ModalShopPageContext } from '../../../contexts/user/ModalShopPageContext/ModalShopPageContext';
 
 const ProductCard = ({ name, category, price, img }: iProductsList) => {
+  const { addProductToCart } = useContext(ModalShopPageContext);
+
   const formattedPrice = price.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -21,7 +25,11 @@ const ProductCard = ({ name, category, price, img }: iProductsList) => {
         </StyledTitle>
         <StyledParagraph className='category'>{category}</StyledParagraph>
         <StyledParagraph className='price'>{formattedPrice}</StyledParagraph>
-        <StyledButton $buttonSize='medium' $buttonStyle='green'>
+        <StyledButton
+          $buttonSize='medium'
+          $buttonStyle='green'
+          onClick={() => addProductToCart}
+        >
           Adicionar
         </StyledButton>
       </div>
