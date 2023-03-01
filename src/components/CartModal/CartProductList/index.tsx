@@ -7,18 +7,27 @@ import { StyledParagraph } from '../../../styles/typography';
 import { ModalShopPageContext } from '../../../contexts/user/ModalShopPageContext/ModalShopPageContext';
 
 const CartProductList = () => {
-  const { setCartModalItens, totalValue } = useContext(ModalShopPageContext);
+  const { setCartModalItens, totalValue, cartModalItens } =
+    useContext(ModalShopPageContext);
+
+  const formattedPrice = totalValue.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   return (
     <StyledCartProductList>
       <ul>
-        <CartProductCard />
+        {cartModalItens.map((product) => (
+          <CartProductCard key={product.id} product={product} />
+        ))}
       </ul>
 
       <div className='totalBox'>
         <StyledParagraph>
           <strong>Total</strong>
         </StyledParagraph>
-        <StyledParagraph className='total'>{totalValue}</StyledParagraph>
+        <StyledParagraph className='total'>{formattedPrice}</StyledParagraph>
       </div>
       <StyledButton
         $buttonSize='default'

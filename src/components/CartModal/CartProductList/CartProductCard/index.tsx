@@ -1,25 +1,26 @@
 import { MdDelete } from 'react-icons/md';
 import { useContext } from 'react';
-
 import { StyledCartProductCard } from './style';
 import { StyledTitle } from '../../../../styles/typography';
 import { ModalShopPageContext } from '../../../../contexts/user/ModalShopPageContext/ModalShopPageContext';
+import { iCartProducts } from '../../../../contexts/products/interfaces/productsInterfaces';
 
-const CartProductCard = () => {
+const CartProductCard = ({ product }: iCartProducts) => {
   const { removeProductFromCart } = useContext(ModalShopPageContext);
+
   return (
     <StyledCartProductCard>
       <div className='imageBox'>
-        <img src='https://i.imgur.com/Vng6VzV.png' alt='Hamburguer' />
+        <img src={product.img} alt={product.name} />
       </div>
       <div className='contentBox'>
         <StyledTitle tag='h3' $fontSize='three'>
-          Hamburguer
+          {product.name}
         </StyledTitle>
         <button
           type='button'
           aria-label='Remover'
-          onClick={() => removeProductFromCart}
+          onClick={() => removeProductFromCart(product)}
         >
           <MdDelete size={24} />
         </button>

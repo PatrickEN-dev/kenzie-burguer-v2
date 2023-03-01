@@ -1,4 +1,6 @@
+/* eslint-disable no-shadow */
 import { createContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { iModalShopPageContext } from './interfaces/shopPageModalInterfaces';
 import { iProductsList } from '../../products/interfaces/productsInterfaces';
 
@@ -16,16 +18,19 @@ export const ModalShopPageProvider = ({
   const [cartModalTotalPrice, setCartModalTotalPrice] = useState(0);
 
   const addProductToCart = (product: iProductsList) => {
-    const existingProduct = cartModalItens.find(
-      (item) => item.id === product.id
-    );
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-      setCartModalItens([...cartModalItens]);
-    } else {
+    const index = cartModalItens.findIndex((item) => item.id === product.id);
+    if (index === -1) {
       setCartModalItens([...cartModalItens, { ...product, quantity: 1 }]);
+    } else {
+      const updatedCart = [...cartModalItens];
+      updatedCart[index].quantity += 1;
+      setCartModalItens(updatedCart);
+
+      cartModalItens.map((product) =>
+        toast.success(`${product.name} está no carrinho!`)
+      );
     }
-    setCartModalTotalPrice((prevPrice) => prevPrice + product.price);
+    setCartModalTotalPrice(cartModalTotalPrice + product.price);
   };
 
   const removeProductFromCart = (product: iProductsList) => {
@@ -42,6 +47,11 @@ export const ModalShopPageProvider = ({
     }
 
     setCartModalItens(updatedCart);
+
+    cartModalItens.map((product) =>
+      toast.error(`${product.name} foi retirado`)
+    );
+
     setCartModalTotalPrice(cartModalTotalPrice - product.price);
   };
 

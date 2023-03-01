@@ -1,7 +1,10 @@
+/* eslint-disable consistent-return */
+/* eslint-disable default-case */
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 interface IStyledButtonProps {
+  $buttonid?: number;
   $buttonSize: 'default' | 'medium';
   $buttonStyle: 'green' | 'gray';
 }

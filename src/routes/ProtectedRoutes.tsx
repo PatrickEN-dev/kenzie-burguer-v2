@@ -1,22 +1,19 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-// /* eslint-disable react/jsx-no-undef */
 
 import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { PacmanLoader } from 'react-spinners';
+import { SyncLoader } from 'react-spinners';
 import { UserRequestContext } from '../contexts/user/UserRequestContext/UserRequestContext';
+import { StyledLoadingTheme } from '../styles/loading';
 
 export const ProtectedRoutes = () => {
   const { user, loading } = useContext(UserRequestContext);
 
-  // const navigate = useNavigate();
-
   if (loading) {
     return (
-      <div className='loading_theme'>
-        <PacmanLoader loading={loading} color='#fad600' />
-        <h2>Carregando...</h2>
-      </div>
+      <StyledLoadingTheme className='loading_theme'>
+        <SyncLoader loading={loading} color='#01e400' />
+      </StyledLoadingTheme>
     );
   }
 

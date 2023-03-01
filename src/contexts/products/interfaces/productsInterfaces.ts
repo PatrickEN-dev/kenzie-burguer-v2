@@ -20,3 +20,7 @@ export interface iProductsList {
   price: number;
   img: string;
 }
+
+export interface iCartProducts {
+  product: iProductsList;
+}
