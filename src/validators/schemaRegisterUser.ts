@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import * as yup from 'yup';
 
 export const schemaRegisterUser = yup

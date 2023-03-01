@@ -7,8 +7,6 @@ import { mainTheme } from './styles/theme';
 import App from './App';
 import { Providers } from './contexts/providers/providers';
 
-// Preciso chamar o componente modal aqui
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
