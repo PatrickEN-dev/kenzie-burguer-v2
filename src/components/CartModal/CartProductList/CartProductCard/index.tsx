@@ -16,6 +16,8 @@ const CartProductCard = ({ product }: iCartProducts) => {
       <div className='contentBox'>
         <StyledTitle tag='h3' $fontSize='three'>
           {product.name}
+          <br />
+          <small>Quantidade: {product.quantity}</small>
         </StyledTitle>
         <button
           type='button'

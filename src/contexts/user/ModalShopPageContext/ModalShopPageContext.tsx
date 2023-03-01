@@ -17,18 +17,27 @@ export const ModalShopPageProvider = ({
   const [cartModalItens, setCartModalItens] = useState<iProductsList[]>([]);
   const [cartModalTotalPrice, setCartModalTotalPrice] = useState(0);
 
+  const updateCartLocalStorage = (product: iProductsList[]) => {
+    localStorage.setItem('@CARTPRODUCTS', JSON.stringify(product));
+    setCartModalItens(product);
+  };
   const addProductToCart = (product: iProductsList) => {
     const index = cartModalItens.findIndex((item) => item.id === product.id);
     if (index === -1) {
-      setCartModalItens([...cartModalItens, { ...product, quantity: 1 }]);
+      const updatedProductCart = [
+        ...cartModalItens,
+        { ...product, quantity: 1 },
+      ];
+      setCartModalItens(updatedProductCart);
+      toast.success(`${product.name} está no carrinho!`);
+
+      updateCartLocalStorage(updatedProductCart);
     } else {
       const updatedCart = [...cartModalItens];
       updatedCart[index].quantity += 1;
       setCartModalItens(updatedCart);
-
-      cartModalItens.map((product) =>
-        toast.success(`${product.name} está no carrinho!`)
-      );
+      updateCartLocalStorage(updatedCart);
+      toast.success(`${product.name} adicionado novamente ao carrinho!`);
     }
     setCartModalTotalPrice(cartModalTotalPrice + product.price);
   };
@@ -48,9 +57,8 @@ export const ModalShopPageProvider = ({
 
     setCartModalItens(updatedCart);
 
-    cartModalItens.map((product) =>
-      toast.error(`${product.name} foi retirado`)
-    );
+    updateCartLocalStorage(updatedCart);
+    toast.error(`${product.name} foi retirado`);
 
     setCartModalTotalPrice(cartModalTotalPrice - product.price);
   };
@@ -63,6 +71,13 @@ export const ModalShopPageProvider = ({
   useEffect(() => {
     setCartModalTotalPrice(totalValue);
   }, [cartModalItens]);
+
+  useEffect(() => {
+    const savedCartItems = localStorage.getItem('@CARTPRODUCTS');
+    if (savedCartItems) {
+      setCartModalItens(JSON.parse(savedCartItems));
+    }
+  }, []);
 
   return (
     <ModalShopPageContext.Provider
